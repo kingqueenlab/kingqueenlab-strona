@@ -276,21 +276,52 @@ function isPriced(value) {
   return typeof value === "number" && Number.isFinite(value);
 }
 
-function formatPrice(value) {
-  return isPriced(value) ? `\u00a3${value.toFixed(2).replace(".00", "")}` : "Request quote";
+function getOptionPrice(product, option, currency = state.currency) {
+  if (currency === "GBP") return option.price;
+
+  const prices = optionPrices[`${product.id}|${option.label}`];
+  return prices?.[currency] ?? option.price;
+}
+
+function getCartItemOption(item) {
+  const product = getProduct(item.productId);
+  const option = product?.options.find((candidate) => candidate.label === item.strength);
+  return { product, option };
+}
+
+function getCartItemPrice(item) {
+  const { product, option } = getCartItemOption(item);
+  return product && option ? getOptionPrice(product, option) : item.price;
+}
+
+function formatPrice(value, currency = state.currency) {
+  if (!isPriced(value)) return "Request quote";
+
+  const amount = value.toFixed(2).replace(".00", "");
+  if (currency === "EUR") return `€${amount}`;
+  if (currency === "PLN") return `${amount} PLN`;
+  return `\u00a3${amount}`;
 }
 
 function getCartSubtotal() {
-  return state.cart.reduce((sum, item) => sum + (isPriced(item.price) ? item.price * item.qty : 0), 0);
+  return state.cart.reduce((sum, item) => {
+    const price = getCartItemPrice(item);
+    return sum + (isPriced(price) ? price * item.qty : 0);
+  }, 0);
 }
 
 function hasQuoteItems() {
-  return state.cart.some((item) => !isPriced(item.price));
+  return state.cart.some((item) => !isPriced(getCartItemPrice(item)));
 }
 
 function getShipping(subtotal) {
-  if (subtotal === 0 || subtotal >= 100) return 0;
-  return 7;
+  if (subtotal === 0) return 0;
+
+  const hasPen = state.cart.some((item) => getProduct(item.productId)?.categoryKey === "pen");
+  if (state.currency === "PLN") return hasPen ? 100 : 80;
+  if (state.currency === "EUR") return hasPen ? 25 : subtotal >= 100 ? 0 : 20;
+  if (hasPen) return 10;
+  return subtotal >= 100 ? 0 : 7;
 }
 
 function getProduct(productId) {
@@ -332,13 +363,13 @@ function renderProducts() {
     image.alt = `${product.name} ${selected.label} King Queen Lab product`;
     card.querySelector("[data-card-strength]").textContent = selected.label;
     card.querySelector("[data-card-heading]").textContent = product.name;
-    card.querySelector("[data-card-price]").textContent = formatPrice(selected.price);
+    card.querySelector("[data-card-price]").textContent = formatPrice(getOptionPrice(product, selected));
     card.querySelector("[data-card-tagline]").textContent = product.tagline;
 
     product.options.forEach((option, index) => {
       const optionNode = document.createElement("option");
       optionNode.value = String(index);
-      optionNode.textContent = `${option.label} - ${formatPrice(option.price)}`;
+      optionNode.textContent = `${option.label} - ${formatPrice(getOptionPrice(product, option))}`;
       select.append(optionNode);
     });
 
@@ -377,6 +408,7 @@ function renderProductModal() {
 
   const selectedIndex = state.selectedOptions[product.id] || 0;
   const selected = product.options[selectedIndex];
+  const selectedPrice = getOptionPrice(product, selected);
   productModalPanel.innerHTML = `
     <button class="icon-button product-close" type="button" data-close-product aria-label="Close product">x</button>
     <div class="product-detail-media">
@@ -396,7 +428,7 @@ function renderProductModal() {
       </label>
       <div class="detail-price-row">
         <span>Selected option</span>
-        <strong>${selected.label} - ${formatPrice(selected.price)}</strong>
+        <strong>${selected.label} - ${formatPrice(selectedPrice)}</strong>
       </div>
       <button class="button button-primary detail-add" type="button" data-detail-add>Add selected option</button>
     </div>
@@ -406,7 +438,7 @@ function renderProductModal() {
   product.options.forEach((option, index) => {
     const optionNode = document.createElement("option");
     optionNode.value = String(index);
-    optionNode.textContent = `${option.label} - ${formatPrice(option.price)}`;
+    optionNode.textContent = `${option.label} - ${formatPrice(getOptionPrice(product, option))}`;
     select.append(optionNode);
   });
   select.value = String(selectedIndex);
@@ -489,10 +521,11 @@ function renderCart() {
   state.cart.forEach((item) => {
     const line = document.createElement("article");
     line.className = "cart-line";
-    const lineTotal = isPriced(item.price) ? formatPrice(item.price * item.qty) : "Request quote";
+    const itemPrice = getCartItemPrice(item);
+    const lineTotal = isPriced(itemPrice) ? formatPrice(itemPrice * item.qty) : "Request quote";
     line.innerHTML = `
       <h3>${item.name}</h3>
-      <div class="cart-line-meta">${item.strength} - ${formatPrice(item.price)} each</div>
+      <div class="cart-line-meta">${item.strength} - ${formatPrice(itemPrice)} each</div>
       <div class="cart-line-actions">
         <div class="qty-controls">
           <button type="button" data-decrease aria-label="Decrease ${item.name} quantity">-</button>
@@ -529,7 +562,8 @@ function buildEnquiryMessage(formData) {
   const total = subtotal + shipping;
   const lines = state.cart.length
     ? state.cart.map((item) => {
-        const lineTotal = isPriced(item.price) ? formatPrice(item.price * item.qty) : "Request quote";
+        const itemPrice = getCartItemPrice(item);
+        const lineTotal = isPriced(itemPrice) ? formatPrice(itemPrice * item.qty) : "Request quote";
         return `- ${item.name} ${item.strength} x ${item.qty} (${lineTotal})`;
       })
     : ["- No basket items selected"];
@@ -539,6 +573,7 @@ function buildEnquiryMessage(formData) {
     "",
     `Name: ${formData.get("name")}`,
     `Email: ${formData.get("email")}`,
+    `Currency: ${currencyLabels[state.currency]}`,
     "",
     "Requested items:",
     ...lines,
@@ -575,6 +610,13 @@ nav.addEventListener("click", (event) => {
 searchInput.addEventListener("input", () => {
   state.search = searchInput.value;
   renderProducts();
+});
+
+currencySelect.addEventListener("change", () => {
+  state.currency = currencySelect.value;
+  renderProducts();
+  renderCart();
+  if (state.activeProductId) renderProductModal();
 });
 
 document.querySelectorAll("[data-open-cart]").forEach((button) => {
