@@ -137,8 +137,8 @@
     description:
       "A premium King Queen Lab injection pen product entry for research enquiries, available in multiple strengths.",
     options: [
-      { label: "20MG Pen", price: 120, image: "injection-pen-tirzepatide-20mg.webp" },
-      { label: "40MG Pen", price: 150, image: "injection-pen-tirzepatide-40mg.webp" },
+      { label: "20MG Pen", price: 150, image: "injection-pen-tirzepatide-20mg.webp" },
+      { label: "40MG Pen", price: 180, image: "injection-pen-tirzepatide-40mg.webp" },
       { label: "60MG Pen", price: 220, image: "injection-pen-tirzepatide-60mg.webp" },
     ],
   },
@@ -228,8 +228,8 @@ const optionPrices = {
   "somatropin|10IU": { PLN: 750, EUR: 165 },
   "tesamorelin|10MG": { PLN: 270, EUR: 65 },
   "mots-c|20MG": { PLN: 300, EUR: 70 },
-  "tirzepatide-injection-pen|20MG Pen": { PLN: 590, EUR: 140 },
-  "tirzepatide-injection-pen|40MG Pen": { PLN: 730, EUR: 175 },
+  "tirzepatide-injection-pen|20MG Pen": { PLN: 730, EUR: 175 },
+  "tirzepatide-injection-pen|40MG Pen": { PLN: 880, EUR: 210 },
   "tirzepatide-injection-pen|60MG Pen": { PLN: 1110, EUR: 255 },
   "retatrutide-injection-pen|20MG Pen": { PLN: 880, EUR: 210 },
   "retatrutide-injection-pen|40MG Pen": { PLN: 1100, EUR: 255 },
