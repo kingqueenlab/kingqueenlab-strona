@@ -228,7 +228,7 @@ const optionPrices = {
   "somatropin|10IU": { PLN: 750, EUR: 165 },
   "tesamorelin|10MG": { PLN: 270, EUR: 65 },
   "mots-c|20MG": { PLN: 300, EUR: 70 },
-  "tirzepatide-injection-pen|20MG Pen": { PLN: 730, EUR: 175 },
+  "tirzepatide-injection-pen|20MG Pen": { PLN: 830, EUR: 170 },
   "tirzepatide-injection-pen|40MG Pen": { PLN: 880, EUR: 210 },
   "tirzepatide-injection-pen|60MG Pen": { PLN: 1110, EUR: 255 },
   "retatrutide-injection-pen|20MG Pen": { PLN: 880, EUR: 210 },
