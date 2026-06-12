@@ -199,6 +199,16 @@
       "A premium King Queen Lab research-use product entry with a dedicated red vial packshot and clear enquiry pricing.",
     options: [{ label: "10MG", price: 15, image: "vitamina-b12-10mg.webp" }],
   },
+  {
+    id: "needles-swabs-kit",
+    name: "Needles & Swabs Kit",
+    category: "Accessories",
+    categoryKey: "accessories",
+    tagline: "10 needles and swabs set.",
+    description:
+      "A practical accessory set for enquiry baskets, containing 10 needles and a swabs pack.",
+    options: [{ label: "10 needles + swabs", price: 7, image: "needles-swabs-kit.webp" }],
+  },
 ];
 
 const currencyLabels = {
@@ -239,6 +249,13 @@ const optionPrices = {
   "nad-injection-pen|1000MG Pen": { PLN: 830, EUR: 200 },
   "klow-injection-pen|80MG Pen": { PLN: 830, EUR: 185 },
   "vitamina-b12|10MG": { PLN: 75, EUR: 17 },
+  "needles-swabs-kit|10 needles + swabs": { PLN: 35, EUR: 8 },
+};
+
+const promotion = {
+  label: "Summer 20%",
+  discount: 0.2,
+  excludedProductIds: ["needles-swabs-kit"],
 };
 
 const state = {
@@ -276,11 +293,24 @@ function isPriced(value) {
   return typeof value === "number" && Number.isFinite(value);
 }
 
-function getOptionPrice(product, option, currency = state.currency) {
+function getOriginalOptionPrice(product, option, currency = state.currency) {
   if (currency === "GBP") return option.price;
 
   const prices = optionPrices[`${product.id}|${option.label}`];
   return prices?.[currency] ?? option.price;
+}
+
+function isPromotionEligible(product) {
+  return product && !promotion.excludedProductIds.includes(product.id);
+}
+
+function applyPromotion(price, product) {
+  if (!isPriced(price) || !isPromotionEligible(product)) return price;
+  return Math.round(price * (1 - promotion.discount) * 100) / 100;
+}
+
+function getOptionPrice(product, option, currency = state.currency) {
+  return applyPromotion(getOriginalOptionPrice(product, option, currency), product);
 }
 
 function getCartItemOption(item) {
@@ -294,6 +324,11 @@ function getCartItemPrice(item) {
   return product && option ? getOptionPrice(product, option) : item.price;
 }
 
+function getCartItemOriginalPrice(item) {
+  const { product, option } = getCartItemOption(item);
+  return product && option ? getOriginalOptionPrice(product, option) : item.price;
+}
+
 function formatPrice(value, currency = state.currency) {
   if (!isPriced(value)) return "Request quote";
 
@@ -301,6 +336,13 @@ function formatPrice(value, currency = state.currency) {
   if (currency === "EUR") return `€${amount}`;
   if (currency === "PLN") return `${amount} PLN`;
   return `\u00a3${amount}`;
+}
+
+function formatPriceHtml(originalPrice, currentPrice, product, currency = state.currency) {
+  if (!isPriced(currentPrice)) return "Request quote";
+  if (!isPromotionEligible(product) || originalPrice === currentPrice) return formatPrice(currentPrice, currency);
+
+  return `<span class="price-stack"><span class="old-price">${formatPrice(originalPrice, currency)}</span><span class="new-price">${formatPrice(currentPrice, currency)}</span></span>`;
 }
 
 function getCartSubtotal() {
@@ -363,13 +405,21 @@ function renderProducts() {
     image.alt = `${product.name} ${selected.label} King Queen Lab product`;
     card.querySelector("[data-card-strength]").textContent = selected.label;
     card.querySelector("[data-card-heading]").textContent = product.name;
-    card.querySelector("[data-card-price]").textContent = formatPrice(getOptionPrice(product, selected));
+    card.querySelector("[data-card-price]").innerHTML = formatPriceHtml(
+      getOriginalOptionPrice(product, selected),
+      getOptionPrice(product, selected),
+      product
+    );
     card.querySelector("[data-card-tagline]").textContent = product.tagline;
 
     product.options.forEach((option, index) => {
       const optionNode = document.createElement("option");
       optionNode.value = String(index);
-      optionNode.textContent = `${option.label} - ${formatPrice(getOptionPrice(product, option))}`;
+      const originalPrice = getOriginalOptionPrice(product, option);
+      const currentPrice = getOptionPrice(product, option);
+      optionNode.textContent = isPromotionEligible(product)
+        ? `${option.label} - ${formatPrice(originalPrice)} now ${formatPrice(currentPrice)}`
+        : `${option.label} - ${formatPrice(currentPrice)}`;
       select.append(optionNode);
     });
 
@@ -408,6 +458,7 @@ function renderProductModal() {
 
   const selectedIndex = state.selectedOptions[product.id] || 0;
   const selected = product.options[selectedIndex];
+  const originalPrice = getOriginalOptionPrice(product, selected);
   const selectedPrice = getOptionPrice(product, selected);
   productModalPanel.innerHTML = `
     <button class="icon-button product-close" type="button" data-close-product aria-label="Close product">x</button>
@@ -428,7 +479,7 @@ function renderProductModal() {
       </label>
       <div class="detail-price-row">
         <span>Selected option</span>
-        <strong>${selected.label} - ${formatPrice(selectedPrice)}</strong>
+        <strong>${selected.label} - ${formatPriceHtml(originalPrice, selectedPrice, product)}</strong>
       </div>
       <button class="button button-primary detail-add" type="button" data-detail-add>Add selected option</button>
     </div>
@@ -438,7 +489,11 @@ function renderProductModal() {
   product.options.forEach((option, index) => {
     const optionNode = document.createElement("option");
     optionNode.value = String(index);
-    optionNode.textContent = `${option.label} - ${formatPrice(getOptionPrice(product, option))}`;
+    const optionOriginalPrice = getOriginalOptionPrice(product, option);
+    const optionCurrentPrice = getOptionPrice(product, option);
+    optionNode.textContent = isPromotionEligible(product)
+      ? `${option.label} - ${formatPrice(optionOriginalPrice)} now ${formatPrice(optionCurrentPrice)}`
+      : `${option.label} - ${formatPrice(optionCurrentPrice)}`;
     select.append(optionNode);
   });
   select.value = String(selectedIndex);
