@@ -345,9 +345,23 @@ function formatPriceHtml(originalPrice, currentPrice, product, currency = state.
   return `<span class="price-stack"><span class="old-price">${formatPrice(originalPrice, currency)}</span><span class="new-price">${formatPrice(currentPrice, currency)}</span></span>`;
 }
 
+function formatSummaryPriceHtml(originalPrice, currentPrice, currency = state.currency) {
+  if (!isPriced(currentPrice)) return "Request quote";
+  if (originalPrice === currentPrice) return formatPrice(currentPrice, currency);
+
+  return `<span class="price-stack"><span class="old-price">${formatPrice(originalPrice, currency)}</span><span class="new-price">${formatPrice(currentPrice, currency)}</span></span>`;
+}
+
 function getCartSubtotal() {
   return state.cart.reduce((sum, item) => {
     const price = getCartItemPrice(item);
+    return sum + (isPriced(price) ? price * item.qty : 0);
+  }, 0);
+}
+
+function getCartOriginalSubtotal() {
+  return state.cart.reduce((sum, item) => {
+    const price = getCartItemOriginalPrice(item);
     return sum + (isPriced(price) ? price * item.qty : 0);
   }, 0);
 }
@@ -555,15 +569,19 @@ function updateQty(key, change) {
 
 function renderCart() {
   cartItems.innerHTML = "";
+  const originalSubtotal = getCartOriginalSubtotal();
   const subtotal = getCartSubtotal();
   const shipping = getShipping(subtotal);
+  const originalTotal = originalSubtotal + shipping;
   const total = subtotal + shipping;
   const itemCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
 
   cartCount.textContent = String(itemCount);
-  subtotalNode.textContent = formatPrice(subtotal);
+  subtotalNode.innerHTML = formatSummaryPriceHtml(originalSubtotal, subtotal);
   shippingNode.textContent = shipping === 0 ? "Free" : formatPrice(shipping);
-  totalNode.textContent = hasQuoteItems() ? `${formatPrice(total)} + quote items` : formatPrice(total);
+  totalNode.innerHTML = hasQuoteItems()
+    ? `${formatSummaryPriceHtml(originalTotal, total)} + quote items`
+    : formatSummaryPriceHtml(originalTotal, total);
 
   if (state.cart.length === 0) {
     const empty = document.createElement("div");
@@ -576,18 +594,21 @@ function renderCart() {
   state.cart.forEach((item) => {
     const line = document.createElement("article");
     line.className = "cart-line";
+    const { product } = getCartItemOption(item);
+    const originalPrice = getCartItemOriginalPrice(item);
     const itemPrice = getCartItemPrice(item);
     const lineTotal = isPriced(itemPrice) ? formatPrice(itemPrice * item.qty) : "Request quote";
+    const originalLineTotal = isPriced(originalPrice) ? originalPrice * item.qty : originalPrice;
     line.innerHTML = `
       <h3>${item.name}</h3>
-      <div class="cart-line-meta">${item.strength} - ${formatPrice(itemPrice)} each</div>
+      <div class="cart-line-meta">${item.strength} - ${formatPriceHtml(originalPrice, itemPrice, product)} each</div>
       <div class="cart-line-actions">
         <div class="qty-controls">
           <button type="button" data-decrease aria-label="Decrease ${item.name} quantity">-</button>
           <strong>${item.qty}</strong>
           <button type="button" data-increase aria-label="Increase ${item.name} quantity">+</button>
         </div>
-        <strong>${lineTotal}</strong>
+        <strong>${formatPriceHtml(originalLineTotal, isPriced(itemPrice) ? itemPrice * item.qty : itemPrice, product)}</strong>
         <button class="remove-button" type="button" data-remove aria-label="Remove ${item.name}">x</button>
       </div>
     `;
@@ -617,9 +638,13 @@ function buildEnquiryMessage(formData) {
   const total = subtotal + shipping;
   const lines = state.cart.length
     ? state.cart.map((item) => {
+        const { product } = getCartItemOption(item);
+        const originalPrice = getCartItemOriginalPrice(item);
         const itemPrice = getCartItemPrice(item);
         const lineTotal = isPriced(itemPrice) ? formatPrice(itemPrice * item.qty) : "Request quote";
-        return `- ${item.name} ${item.strength} x ${item.qty} (${lineTotal})`;
+        const originalLineTotal = isPriced(originalPrice) ? formatPrice(originalPrice * item.qty) : "Request quote";
+        const promoNote = isPromotionEligible(product) ? `, was ${originalLineTotal}` : "";
+        return `- ${item.name} ${item.strength} x ${item.qty} (${lineTotal}${promoNote})`;
       })
     : ["- No basket items selected"];
 
@@ -629,6 +654,7 @@ function buildEnquiryMessage(formData) {
     `Name: ${formData.get("name")}`,
     `Email: ${formData.get("email")}`,
     `Currency: ${currencyLabels[state.currency]}`,
+    `Promotion: ${promotion.label} - 20% off eligible products. Shipping and needles/swabs kit excluded.`,
     "",
     "Requested items:",
     ...lines,
