@@ -99,16 +99,6 @@
     options: [{ label: "80MG", price: 120, image: "klow-80mg.webp" }],
   },
   {
-    id: "somatropin",
-    name: "Somatropin",
-    category: "Peptide",
-    categoryKey: "peptide",
-    tagline: "100IU research kit.",
-    description:
-      "A single-option research catalogue item presented as a 100IU kit containing 10 vials x 10IU.",
-    options: [{ label: "100IU (10 vials x 10IU)", price: 140, image: "somatropin-10iu.webp" }],
-  },
-  {
     id: "tesamorelin",
     name: "Tesamorelin",
     category: "Peptide",
@@ -235,7 +225,6 @@ const optionPrices = {
   "ghk-cu|50MG": { PLN: 150, EUR: 35 },
   "ghk-cu|100MG": { PLN: 300, EUR: 70 },
   "klow|80MG": { PLN: 650, EUR: 140 },
-  "somatropin|100IU (10 vials x 10IU)": { PLN: 750, EUR: 165 },
   "tesamorelin|10MG": { PLN: 270, EUR: 65 },
   "mots-c|20MG": { PLN: 300, EUR: 70 },
   "tirzepatide-injection-pen|20MG Pen": { PLN: 730, EUR: 170 },
