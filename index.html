@@ -1,260 +1,202 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="King Queen Lab premium research shop with selectable product options and enquiry basket.">
-    <title>King Queen Lab | Premium Research Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="King Queen Lab research information portal for educational compound and laboratory material references.">
+    <title>King Queen Lab | Research Information Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260615-research-portal">
   </head>
   <body>
     <header class="site-header" data-header>
       <a class="brand" href="#home" aria-label="King Queen Lab home">
-        <span class="brand-mark"><img src="kql-logo-transparent.webp" alt=""></span>
+        <img src="kql-logo-transparent.webp" alt="King Queen Lab logo">
         <span>
           <strong>King Queen Lab</strong>
-          <small>Premium Research Shop</small>
+          <small>Research Information Portal</small>
         </span>
       </a>
 
-      <div class="promo-banner" aria-label="Current promotion">
-        <span class="promo-kicker">Limited offer</span>
-        <strong>Summer 20%</strong>
-        <span class="promo-date">12/06/26 - 21/06/26 midnight</span>
-      </div>
-
-      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-expanded="false">
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation">
         <span></span>
         <span></span>
       </button>
 
       <nav class="site-nav" data-nav>
-        <a href="#shop">Shop</a>
-        <a href="#standards">Standards</a>
-        <a href="#enquiry">Enquiry</a>
+        <a href="#information">Research Information</a>
+        <a href="#compounds">Research Compounds</a>
+        <a href="#library">Reference Library</a>
+        <a href="#resources">Educational Resources</a>
         <a href="#contact">Contact</a>
-        <label class="currency-picker">
-          <span>Currency</span>
-          <select data-currency-select>
-            <option value="GBP">GBP</option>
-            <option value="PLN">PLN</option>
-            <option value="EUR">EUR</option>
-          </select>
-        </label>
-        <button class="cart-pill" type="button" data-open-cart>
-          <span class="icon" aria-hidden="true">bag</span>
-          <span>Basket</span>
-          <strong data-cart-count>0</strong>
-        </button>
       </nav>
     </header>
 
     <main>
       <section class="hero" id="home">
-        <img class="hero-media" src="kingqueenlab-hero.png" alt="Premium laboratory scene with chess-inspired King Queen Lab styling">
-        <div class="hero-shade"></div>
+        <div class="hero-ambient" aria-hidden="true"></div>
         <div class="hero-inner">
-          <div class="hero-copy-panel">
-            <img class="hero-logo" src="kql-logo-transparent.webp" alt="King Queen Lab logo">
-            <p class="eyebrow">Premium research brand</p>
-            <h1>King Queen Lab</h1>
-            <p class="hero-copy">A refined luxury shop for King & Queen Lab products, selectable strengths and quote-ready basket management.</p>
+          <div class="hero-copy-wrap">
+            <p class="eyebrow">Research Information Portal</p>
+            <h1>King Queen Lab Research Information Portal</h1>
+            <p class="hero-copy">Providing educational and informational content relating to research compounds and laboratory materials.</p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#shop">View shop</a>
-              <button class="button button-ghost" type="button" data-open-cart>Open basket</button>
+              <a class="button button-primary" href="#compounds">Explore compounds</a>
+              <a class="button button-ghost" href="#library">Reference library</a>
             </div>
-            <div class="trust-row" aria-label="Service highlights">
-              <span>Research use only</span>
-              <span>Discreet fulfilment</span>
-              <span>Free shipping over £100</span>
+            <div class="trust-row" aria-label="Research portal highlights">
+              <span>Research Information</span>
+              <span>Research Materials</span>
+              <span>Laboratory Reference Library</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="notice">
-        <div class="container notice-grid">
-          <strong>Compliance first</strong>
-          <p>This website is structured as an enquiry shop for qualified research purposes only. It does not provide medical advice, dosage guidance or direct pharmaceutical checkout.</p>
-        </div>
-      </section>
-
-      <section class="catalogue" id="shop" aria-labelledby="shop-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="eyebrow">Shop</p>
-            <h2 id="shop-title">Select product, choose strength, build an enquiry.</h2>
-            <p>Each product opens into a premium detail view where the selected strength updates the image and enquiry price instantly.</p>
+          <div class="hero-visual" aria-label="King Queen Lab visual identity">
+            <img src="kingqueenlab-hero.png" alt="King Queen Lab premium black and gold research branding">
           </div>
-
-          <div class="toolbar">
-            <label class="search-field">
-              <span>Search products</span>
-              <input type="search" data-search placeholder="Search by product name">
-            </label>
-          </div>
-
-          <div class="product-grid" data-product-grid></div>
-          <p class="empty-state" data-empty-state hidden>No products match this search.</p>
         </div>
       </section>
 
-      <section class="standards" id="standards" aria-labelledby="standards-title">
-        <div class="container standards-layout">
+      <section class="notice" id="information">
+        <div>
+          <p class="eyebrow">Research Information</p>
+          <h2>Educational compound references in a structured research format.</h2>
+        </div>
+        <p>This website is an informational reference portal only. Content is prepared for general research education, laboratory context and compound awareness. It does not provide medical advice, usage instructions, dosing guidance or consumer recommendations.</p>
+      </section>
+
+      <section class="catalogue" id="compounds" aria-labelledby="compounds-title">
+        <div class="section-heading">
           <div>
-            <p class="eyebrow">Standards</p>
-            <h2 id="standards-title">A storefront that feels premium and controlled.</h2>
-            <p>Clear product hierarchy, careful disclaimers and quote-based purchasing create a more credible research brand experience than a generic shop template.</p>
+            <p class="eyebrow">Research Compounds</p>
+            <h2 id="compounds-title">Compound reference pages for educational review.</h2>
+            <p>Browse research compound profiles with molecular context, category notes, reference prompts and clear informational disclaimers.</p>
           </div>
-          <div class="standard-list">
-            <article>
-              <span>01</span>
-              <h3>Strength-led selection</h3>
-              <p>Customers choose the exact vial option before adding it to the enquiry basket.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Transparent totals</h3>
-              <p>Subtotal, shipping threshold and enquiry total update in real time.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Ready for integration</h3>
-              <p>The basket can later connect to CRM, email automation or a compliant payment flow.</p>
-            </article>
-          </div>
+          <label class="search-box">
+            <span>Search references</span>
+            <input type="search" placeholder="Search by compound, material or category" data-search>
+          </label>
+        </div>
+        <div class="compound-grid" data-reference-grid></div>
+        <p class="empty-state" data-empty-state hidden>No reference pages match this search.</p>
+      </section>
+
+      <section class="standards" id="library">
+        <div class="standards-copy">
+          <p class="eyebrow">Laboratory Reference Library</p>
+          <h2>Structured information, not commercial catalogue content.</h2>
+          <p>The reference library is arranged around molecular information, research category, general literature context and responsible disclaimers. It is designed to support educational reading and laboratory awareness only.</p>
+        </div>
+        <div class="standard-list">
+          <article>
+            <span>01</span>
+            <h3>Molecular information</h3>
+            <p>Each reference page includes a concise molecular or material overview for educational orientation.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Research categories</h3>
+            <p>Compounds and materials are grouped by research context, such as peptide research, cellular metabolism or laboratory materials.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Reference prompts</h3>
+            <p>Research references are presented as literature-search guidance and database review prompts rather than usage advice.</p>
+          </article>
         </div>
       </section>
 
-      <section class="enquiry" id="enquiry" aria-labelledby="enquiry-title">
-        <div class="container enquiry-layout">
+      <section class="resources" id="resources" aria-labelledby="resources-title">
+        <div class="section-heading">
           <div>
-            <p class="eyebrow">Enquiry</p>
-            <h2 id="enquiry-title">Request information</h2>
-            <p>Use the basket to prepare product options, then send a structured enquiry. The message is generated automatically from current basket contents.</p>
+            <p class="eyebrow">Educational Resources</p>
+            <h2 id="resources-title">Research Materials and Educational Resources</h2>
+            <p>Use these sections as a neutral orientation point for compound terminology, laboratory context and responsible information review.</p>
+          </div>
+        </div>
+        <div class="resource-grid">
+          <article>
+            <h3>Research Information</h3>
+            <p>General educational summaries for selected research compounds and laboratory materials.</p>
+          </article>
+          <article>
+            <h3>Research Materials</h3>
+            <p>Material-focused notes covering non-clinical laboratory reference context.</p>
+          </article>
+          <article>
+            <h3>Educational Resources</h3>
+            <p>Suggested directions for literature review, database checks and responsible source comparison.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="enquiry" id="enquiry">
+        <div class="enquiry-card">
+          <div>
+            <p class="eyebrow">Research Information</p>
+            <h2>General research information enquiries</h2>
+            <p>For general research information enquiries only.</p>
           </div>
           <form class="enquiry-form" data-enquiry-form>
             <label>
               Name
-              <input name="name" type="text" autocomplete="name" placeholder="Your name" required>
+              <input name="name" type="text" autocomplete="name" required>
             </label>
             <label>
               Email
-              <input name="email" type="email" autocomplete="email" placeholder="contact@example.com" required>
+              <input name="email" type="email" autocomplete="email" required>
             </label>
             <label>
-              Notes
-              <textarea name="notes" rows="5" placeholder="Research organisation, requested documents or questions"></textarea>
+              Research topic or notes
+              <textarea name="message" rows="5" placeholder="General research information question" required></textarea>
             </label>
-            <button class="button button-primary" type="submit">Send enquiry</button>
+            <button class="button button-primary" type="submit">Send research enquiry</button>
             <p class="form-status" data-form-status aria-live="polite"></p>
           </form>
         </div>
       </section>
 
-      <section class="contact" id="contact" aria-labelledby="contact-title">
-        <div class="container">
-          <div class="section-head">
-            <p class="eyebrow">Contact</p>
-            <h2 id="contact-title">Connect with King Queen Lab.</h2>
-            <p>Choose the fastest channel for product questions, order enquiries or social updates.</p>
-          </div>
-          <div class="contact-grid" aria-label="King Queen Lab contact links">
-            <a class="contact-card" href="https://wa.me/447375599830" target="_blank" rel="noopener">
-              <span>WhatsApp</span>
-              <strong>+44 7375 599830</strong>
-            </a>
-            <a class="contact-card" href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noopener">
-              <span>Facebook</span>
-              <strong>KINGQUEEN-LAB</strong>
-            </a>
-            <a class="contact-card" href="https://www.instagram.com/king.queen.lab/" target="_blank" rel="noopener">
-              <span>Instagram</span>
-              <strong>king.queen.lab</strong>
-            </a>
-            <a class="contact-card" href="https://www.tiktok.com/@king.queen.lab" target="_blank" rel="noopener">
-              <span>TikTok</span>
-              <strong>king.queen.lab</strong>
-            </a>
-          </div>
+      <section class="contact" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Research information contact channels</h2>
+          <p>For general research information enquiries only.</p>
+        </div>
+        <div class="social-grid">
+          <a href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noreferrer">Facebook</a>
+          <a href="https://www.instagram.com/king.queen.lab/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.tiktok.com/@king.queen.lab" target="_blank" rel="noreferrer">TikTok</a>
+          <a href="https://wa.me/447375599830" target="_blank" rel="noreferrer">WhatsApp</a>
         </div>
       </section>
     </main>
 
-    <aside class="cart-drawer" data-cart-drawer aria-label="Basket" aria-hidden="true">
-      <div class="cart-panel">
-        <div class="cart-head">
-          <div>
-            <p class="eyebrow">Basket</p>
-            <h2>Enquiry summary</h2>
-          </div>
-          <button class="icon-button" type="button" data-close-cart aria-label="Close basket">×</button>
-        </div>
-        <div class="cart-items" data-cart-items></div>
-        <div class="cart-summary">
-          <div>
-            <span>Subtotal</span>
-            <strong data-subtotal>£0</strong>
-          </div>
-          <div>
-            <span>Shipping estimate</span>
-            <strong data-shipping>£0</strong>
-          </div>
-          <div class="summary-total">
-            <span>Total</span>
-            <strong data-total>£0</strong>
-          </div>
-        </div>
-        <a class="button button-primary cart-checkout" href="#enquiry" data-close-cart-link>Continue to enquiry</a>
-      </div>
-    </aside>
-
-    <aside class="product-modal" data-product-modal aria-label="Product details" aria-hidden="true">
-      <div class="product-modal-panel" data-product-modal-panel></div>
+    <aside class="reference-modal" data-reference-modal aria-hidden="true">
+      <div class="reference-modal-panel" data-reference-modal-panel role="dialog" aria-modal="true" aria-label="Research reference page"></div>
     </aside>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <span>© 2026 King Queen Lab</span>
-        <div class="footer-social" aria-label="King Queen Lab contact links">
-          <a href="https://wa.me/447375599830" target="_blank" rel="noopener">WhatsApp</a>
-          <a href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noopener">Facebook</a>
-          <a href="https://www.instagram.com/king.queen.lab/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/@king.queen.lab" target="_blank" rel="noopener">TikTok</a>
-        </div>
-        <span>Research-focused information only. No medical advice.</span>
-      </div>
+      <span>&copy; 2026 King Queen Lab</span>
+      <span>All content is provided for informational and educational purposes only.</span>
     </footer>
 
-    <template id="product-template">
-      <article class="product-card">
-        <div class="product-media">
+    <template id="reference-template">
+      <article class="compound-card">
+        <button class="compound-open" type="button" data-open-reference aria-label="Open research reference page"></button>
+        <div class="compound-media">
           <img data-card-image alt="">
-          <div class="product-badge">
-            <span data-card-strength></span>
-          </div>
+          <span class="compound-badge" data-card-category></span>
         </div>
-        <div class="product-body">
-          <div class="product-title-row">
-            <div>
-              <h3 data-card-heading></h3>
-            </div>
-            <strong data-card-price></strong>
-          </div>
-          <p class="tagline" data-card-tagline></p>
-          <label class="option-select">
-            Select option
-            <select data-option-select></select>
-          </label>
-          <button class="button button-ghost details-button" type="button" data-detail-button>View details</button>
-          <button class="button button-primary add-button" type="button" data-add-button>Add to basket</button>
+        <div class="compound-body">
+          <h3 data-card-heading></h3>
+          <p data-card-tagline></p>
+          <span class="text-link">Open reference page</span>
         </div>
       </article>
     </template>
 
-    <script src="script.js?v=20260612-hgh-removed"></script>
+    <script src="script.js?v=20260615-research-portal"></script>
   </body>
 </html>
