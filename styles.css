@@ -187,11 +187,20 @@ img {
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
-  gap: clamp(36px, 7vw, 90px);
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.9fr);
+  gap: clamp(28px, 5vw, 70px);
   align-items: center;
   max-width: 1320px;
   margin: 0 auto;
+}
+
+.hero-copy-wrap {
+  position: relative;
+  z-index: 2;
+  border-left: 1px solid var(--line-strong);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.42) 68%, transparent);
+  padding: clamp(22px, 4vw, 42px) clamp(18px, 4vw, 44px);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
 }
 
 .eyebrow {
@@ -216,10 +225,12 @@ h2 {
 }
 
 h1 {
-  max-width: 940px;
-  font-size: clamp(3rem, 7.5vw, 7.8rem);
-  line-height: 0.93;
+  max-width: 860px;
+  font-size: clamp(2.55rem, 5.7vw, 5.9rem);
+  line-height: 1.02;
   text-transform: uppercase;
+  text-wrap: balance;
+  text-shadow: 0 8px 34px rgba(0, 0, 0, 0.9), 0 0 26px rgba(243, 201, 106, 0.16);
 }
 
 h2 {
@@ -295,6 +306,7 @@ h3 {
 
 .hero-visual {
   position: relative;
+  z-index: 1;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -306,7 +318,9 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.56));
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.38), transparent 42%),
+    linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.58));
   pointer-events: none;
 }
 

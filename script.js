@@ -176,22 +176,6 @@ const references = [
     ]
   },
   {
-    id: "needle-swab-set",
-    name: "Needle and Swab Set",
-    category: "Laboratory materials",
-    image: "needles-swabs-kit.webp",
-    tagline: "General laboratory material reference.",
-    molecular:
-      "Non-compound laboratory material reference covering sterile needle and swab terminology in general laboratory handling contexts.",
-    description:
-      "This entry is provided only as a laboratory materials reference for general educational awareness around accessories and handling terminology.",
-    references: [
-      "Review general laboratory consumable handling documentation.",
-      "Compare sterile accessory terminology from reputable laboratory suppliers.",
-      "Follow local laboratory governance and institutional procedures."
-    ]
-  },
-  {
     id: "tirzepatide-pen-reference",
     name: "Tirzepatide Pen Format Reference",
     category: "Research material reference",
