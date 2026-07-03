@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260615-research-portal">
+    <link rel="stylesheet" href="styles.css?v=20260703-selank">
   </head>
   <body>
     <header class="site-header" data-header>
@@ -31,6 +31,7 @@
         <a href="#library">Reference Library</a>
         <a href="#resources">Educational Resources</a>
         <a href="#contact">Contact</a>
+        <button class="basket-trigger" type="button" data-open-cart>Basket <strong data-cart-count>0</strong></button>
       </nav>
     </header>
 
@@ -86,8 +87,8 @@
       <section class="standards" id="library">
         <div class="standards-copy">
           <p class="eyebrow">Laboratory Reference Library</p>
-          <h2>Structured information, not commercial catalogue content.</h2>
-          <p>The reference library is arranged around molecular information, research category, general literature context and responsible disclaimers. It is designed to support educational reading and laboratory awareness only.</p>
+          <h2>Structured information with detailed product options.</h2>
+          <p>The reference library is arranged around molecular information, research category, general literature context and responsible disclaimers. Available formats and prices appear only after opening an individual product.</p>
         </div>
         <div class="standard-list">
           <article>
@@ -136,8 +137,8 @@
         <div class="enquiry-card">
           <div>
             <p class="eyebrow">Research Information</p>
-            <h2>General research information enquiries</h2>
-            <p>For general research information enquiries only.</p>
+            <h2>Product and research enquiries</h2>
+            <p>Your selected basket items will be included automatically with the enquiry.</p>
           </div>
           <form class="enquiry-form" data-enquiry-form>
             <label>
@@ -149,10 +150,10 @@
               <input name="email" type="email" autocomplete="email" required>
             </label>
             <label>
-              Research topic or notes
-              <textarea name="message" rows="5" placeholder="General research information question" required></textarea>
+              Enquiry notes
+              <textarea name="message" rows="5" placeholder="Add any product or research information questions" required></textarea>
             </label>
-            <button class="button button-primary" type="submit">Send research enquiry</button>
+            <button class="button button-primary" type="submit">Send enquiry</button>
             <p class="form-status" data-form-status aria-live="polite"></p>
           </form>
         </div>
@@ -161,8 +162,8 @@
       <section class="contact" id="contact">
         <div>
           <p class="eyebrow">Contact</p>
-          <h2>Research information contact channels</h2>
-          <p>For general research information enquiries only.</p>
+          <h2>Product and research contact channels</h2>
+          <p>Contact King Queen Lab for product options or general research information.</p>
         </div>
         <div class="social-grid">
           <a href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noreferrer">Facebook</a>
@@ -172,6 +173,24 @@
         </div>
       </section>
     </main>
+
+    <aside class="cart-drawer" data-cart-drawer aria-hidden="true">
+      <div class="cart-panel">
+        <div class="cart-head">
+          <div>
+            <p class="eyebrow">Selected products</p>
+            <h2>Your Basket</h2>
+          </div>
+          <button class="modal-close" type="button" data-close-cart aria-label="Close basket">&times;</button>
+        </div>
+        <div class="cart-items" data-cart-items></div>
+        <div class="cart-summary">
+          <span>Subtotal</span>
+          <strong data-cart-subtotal>£0</strong>
+        </div>
+        <a class="button button-primary" href="#enquiry" data-cart-enquiry>Continue to enquiry</a>
+      </div>
+    </aside>
 
     <aside class="reference-modal" data-reference-modal aria-hidden="true">
       <div class="reference-modal-panel" data-reference-modal-panel role="dialog" aria-modal="true" aria-label="Research reference page"></div>
@@ -192,11 +211,12 @@
         <div class="compound-body">
           <h3 data-card-heading></h3>
           <p data-card-tagline></p>
+          <div class="format-summary" data-card-formats></div>
           <span class="text-link">Open reference page</span>
         </div>
       </article>
     </template>
 
-    <script src="script.js?v=20260615-research-portal"></script>
+    <script src="script.js?v=20260703-selank"></script>
   </body>
 </html>

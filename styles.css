@@ -125,6 +125,31 @@ img {
   color: var(--gold);
 }
 
+.basket-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(243, 201, 106, 0.08);
+  color: var(--gold);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.basket-trigger strong {
+  display: grid;
+  min-width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #080705;
+  font-size: 0.76rem;
+}
+
 .nav-toggle {
   display: none;
   width: 44px;
@@ -449,6 +474,14 @@ h3 {
   transition: transform 260ms ease;
 }
 
+.compound-media img.is-placeholder {
+  object-fit: contain;
+  padding: 20%;
+  background:
+    radial-gradient(circle at center, rgba(243, 201, 106, 0.13), transparent 42%),
+    #050505;
+}
+
 .compound-card:hover .compound-media img {
   transform: scale(1.035);
 }
@@ -484,10 +517,21 @@ h3 {
 }
 
 .compound-body p {
-  min-height: 48px;
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.format-summary {
+  display: grid;
+  gap: 7px;
+  min-height: 50px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .text-link {
@@ -667,7 +711,10 @@ h3 {
 }
 
 .reference-detail-media {
-  min-height: 100%;
+  display: grid;
+  min-height: 620px;
+  place-items: center;
+  overflow: hidden;
   border-right: 1px solid var(--line);
   background: #020202;
 }
@@ -677,6 +724,26 @@ h3 {
   height: 100%;
   min-height: 620px;
   object-fit: cover;
+}
+
+.reference-detail-media img.is-placeholder {
+  object-fit: contain;
+  padding: 20%;
+  background:
+    radial-gradient(circle at center, rgba(243, 201, 106, 0.14), transparent 38%),
+    #050505;
+}
+
+.reference-detail-media img.is-contain {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: min(720px, calc(100vh - 80px));
+  object-fit: contain;
+  padding: clamp(18px, 4vw, 42px);
+  background:
+    radial-gradient(circle at center, rgba(243, 201, 106, 0.12), transparent 48%),
+    #050505;
 }
 
 .reference-detail-copy {
@@ -698,6 +765,60 @@ h3 {
   text-transform: uppercase;
 }
 
+.product-options {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(243, 201, 106, 0.07);
+  padding: 18px;
+}
+
+.product-options label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-options select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #090908;
+  color: var(--text);
+  padding: 0 14px;
+  outline: none;
+}
+
+.product-options select:focus {
+  border-color: var(--gold);
+}
+
+.selected-price {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.selected-price span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.selected-price strong {
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+}
+
 .detail-block {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -711,22 +832,161 @@ h3 {
 }
 
 .detail-block p,
-.reference-list {
+.reference-list,
+.format-list {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
 }
 
-.reference-list {
+.reference-list,
+.format-list {
   padding-left: 20px;
 }
 
-.reference-list li + li {
+.reference-list li + li,
+.format-list li + li {
   margin-top: 8px;
+}
+
+.format-list {
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .disclaimer-block {
   border-color: rgba(54, 163, 155, 0.35);
+}
+
+.cart-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.cart-drawer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-panel {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 18px;
+  width: min(520px, 100%);
+  height: 100%;
+  overflow: hidden;
+  border-left: 1px solid var(--line-strong);
+  background: #080807;
+  padding: 24px;
+  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 200ms ease;
+}
+
+.cart-drawer.is-open .cart-panel {
+  transform: translateX(0);
+}
+
+.cart-head {
+  position: relative;
+  padding-right: 52px;
+}
+
+.cart-head h2 {
+  font-size: 2.3rem;
+}
+
+.cart-head .modal-close {
+  top: 0;
+  right: 0;
+}
+
+.cart-items {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.cart-empty,
+.cart-item {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 16px;
+}
+
+.cart-empty {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cart-item {
+  display: grid;
+  gap: 14px;
+}
+
+.cart-item h3 {
+  color: var(--gold);
+}
+
+.cart-item p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cart-item-actions {
+  display: grid;
+  grid-template-columns: 36px 28px 36px 1fr 36px;
+  gap: 8px;
+  align-items: center;
+}
+
+.cart-item-actions button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.cart-item-actions strong {
+  text-align: center;
+}
+
+.cart-item-actions span {
+  justify-self: end;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.cart-item-actions .remove-item {
+  color: #f19b9b;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  font-size: 1.1rem;
+}
+
+.cart-summary strong {
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
 }
 
 .site-footer {
@@ -771,6 +1031,11 @@ h3 {
 
   .site-nav a {
     padding: 14px;
+  }
+
+  .basket-trigger {
+    justify-content: space-between;
+    margin: 6px;
   }
 
   .hero-inner,
@@ -847,5 +1112,9 @@ h3 {
 
   .reference-detail-media img {
     min-height: 340px;
+  }
+
+  .cart-panel {
+    padding: 18px;
   }
 }
