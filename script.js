@@ -429,21 +429,23 @@ function getImageClass(fit) {
 
 function getFilteredReferences() {
   const term = state.search.trim().toLowerCase();
-  if (!term) return references;
+  const filtered = term
+    ? references.filter((reference) =>
+        [
+          reference.name,
+          reference.category,
+          reference.tagline,
+          reference.molecular,
+          reference.description,
+          ...reference.formats
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(term)
+      )
+    : references;
 
-  return references.filter((reference) =>
-    [
-      reference.name,
-      reference.category,
-      reference.tagline,
-      reference.molecular,
-      reference.description,
-      ...reference.formats
-    ]
-      .join(" ")
-      .toLowerCase()
-      .includes(term)
-  );
+  return [...filtered].sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
 }
 
 function renderReferences() {
@@ -488,7 +490,7 @@ function renderReferenceModal(reference) {
       <img class="${getImageClass(selectedOption.fit)}" src="${selectedOption.image}" alt="${reference.name} ${selectedOption.label}">
     </div>
     <div class="reference-detail-copy">
-      <p class="eyebrow">Research Information</p>
+      <p class="eyebrow">Product profile</p>
       <h2>${reference.name}</h2>
       <p class="detail-category">${reference.category}</p>
 
@@ -567,6 +569,7 @@ function openReference(id) {
   referenceModal.classList.add("is-open");
   referenceModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  referenceModalPanel.querySelector("[data-close-reference]").focus();
 }
 
 function closeReference() {
@@ -647,6 +650,7 @@ function openCart() {
   cartDrawer.classList.add("is-open");
   cartDrawer.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  document.querySelector("[data-close-cart]").focus();
 }
 
 function closeCart() {
@@ -717,12 +721,14 @@ window.addEventListener("scroll", syncHeader, { passive: true });
 navToggle.addEventListener("click", () => {
   nav.classList.toggle("is-open");
   navToggle.classList.toggle("is-open");
+  navToggle.setAttribute("aria-expanded", String(nav.classList.contains("is-open")));
 });
 
 nav.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
     nav.classList.remove("is-open");
     navToggle.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
   });
 });
 
@@ -755,3 +761,8 @@ enquiryForm.addEventListener("submit", submitEnquiry);
 syncHeader();
 renderReferences();
 renderCart();
+
+const requestedProduct = new URLSearchParams(window.location.search).get("product");
+if (requestedProduct && getReference(requestedProduct)) {
+  openReference(requestedProduct);
+}
