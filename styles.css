@@ -158,7 +158,7 @@ svg {
 
 .site-header.is-scrolled {
   border-bottom: 1px solid var(--line-soft);
-  background: rgba(3, 3, 3, 0.74);
+  background: rgba(3, 3, 3, 0.94);
   padding-block: 14px;
   backdrop-filter: blur(18px);
 }
@@ -1435,6 +1435,248 @@ svg {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Homepage clarity refresh: alternating editorial bands keep the dark KQL
+   identity while giving dense product content more room to breathe. */
+.trust-strip {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+  background: #0a0a0a;
+}
+
+.trust-item {
+  min-height: 146px;
+  border-right-color: rgba(255, 255, 255, 0.12);
+}
+
+.trust-item strong {
+  color: #ffffff;
+}
+
+.trust-item p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.collection-section {
+  background: #f5f5f2;
+  color: #0a0a0a;
+}
+
+.collection-section::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(160px, 28vw);
+  height: 3px;
+  background: var(--gold);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.collection-section .section-heading .eyebrow,
+.contact-section .eyebrow {
+  color: #8a641b;
+}
+
+.collection-section .section-heading h2,
+.contact-section h2 {
+  color: #090909;
+}
+
+.collection-section .section-heading h2 {
+  color: #111111;
+}
+
+.collection-section .button-secondary {
+  border-color: rgba(10, 10, 10, 0.24);
+  background: #ffffff;
+  color: #090909;
+}
+
+.collection-section .button-secondary:hover {
+  border-color: var(--gold-deep);
+  background: #090909;
+  color: #ffffff;
+}
+
+.featured-grid,
+.catalogue-grid,
+.section-heading,
+.quality-section,
+.contact-section {
+  width: min(100%, 1480px);
+  margin-inline: auto;
+}
+
+.featured-grid {
+  gap: 18px;
+}
+
+.featured-grid .product-card {
+  border-color: rgba(10, 10, 10, 0.14);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+}
+
+.product-card {
+  border-radius: 4px;
+}
+
+.product-card h3 {
+  color: #ffffff;
+}
+
+.about-copy {
+  background: #0a0a0a;
+}
+
+.about-copy p:not(.eyebrow) {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.quality-section {
+  max-width: none;
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+.quality-copy,
+.quality-panel {
+  width: 100%;
+}
+
+.quality-copy .eyebrow {
+  color: #8a641b;
+}
+
+.quality-copy p {
+  color: #555555;
+}
+
+.quality-panel {
+  border-color: rgba(10, 10, 10, 0.16);
+  background: #f4f4f1;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.11);
+}
+
+.quality-tab {
+  border-right-color: rgba(10, 10, 10, 0.12);
+  color: #555555;
+}
+
+.quality-tab.is-active {
+  background: #0a0a0a;
+  color: var(--gold-soft);
+}
+
+.quality-content {
+  border-top-color: rgba(10, 10, 10, 0.12);
+  color: #151515;
+}
+
+.catalogue-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #090909;
+}
+
+.catalogue-section .section-heading p:not(.eyebrow) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.catalogue-grid {
+  gap: 18px;
+}
+
+.catalogue-grid .product-card {
+  border-color: rgba(255, 255, 255, 0.13);
+  background: #101010;
+}
+
+.catalogue-grid .product-card:hover {
+  border-color: rgba(242, 200, 107, 0.7);
+}
+
+.newsletter-section {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: #111111;
+}
+
+.newsletter-section h2 {
+  max-width: 720px;
+  color: #ffffff;
+}
+
+.contact-section {
+  max-width: none;
+  border-top: 0;
+  background: #f5f5f2;
+  color: #0a0a0a;
+}
+
+.contact-card,
+.enquiry-form {
+  width: 100%;
+  max-width: 700px;
+}
+
+.contact-card {
+  justify-self: end;
+}
+
+.contact-card p {
+  color: #555555;
+}
+
+.social-links a {
+  border-color: rgba(10, 10, 10, 0.22);
+  background: #ffffff;
+  color: #624711;
+}
+
+.social-links a:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.enquiry-form {
+  justify-self: start;
+  border-color: rgba(10, 10, 10, 0.14);
+  background: #ffffff;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.1);
+}
+
+.enquiry-form label {
+  color: #624711;
+}
+
+.enquiry-form input,
+.enquiry-form textarea {
+  border-color: rgba(10, 10, 10, 0.18);
+  background: #f7f7f5;
+  color: #0a0a0a;
+}
+
+.enquiry-form input::placeholder,
+.enquiry-form textarea::placeholder {
+  color: #777777;
+}
+
+.consent-field {
+  color: #555555 !important;
+}
+
+.site-footer {
+  border-top-color: rgba(255, 255, 255, 0.14);
+  background: #080808;
+}
+
+.site-footer h3 {
+  color: #ffffff;
+}
+
+.site-footer a,
+.site-footer p,
+.site-footer span {
+  color: rgba(255, 255, 255, 0.62);
 }
 
 @media (max-width: 1180px) {
