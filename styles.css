@@ -476,7 +476,7 @@ svg {
   overflow: hidden;
   align-self: stretch;
   border-left: 1px solid rgba(217, 168, 58, 0.12);
-  background: #020202;
+  background: #020202 url("kingqueenlab-hero.png") center / cover no-repeat;
 }
 
 .hero-showcase {
