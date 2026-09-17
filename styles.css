@@ -473,6 +473,28 @@ svg {
   position: relative;
   min-height: 650px;
   perspective: 1100px;
+  overflow: hidden;
+  align-self: stretch;
+  border-left: 1px solid rgba(217, 168, 58, 0.12);
+  background: #020202;
+}
+
+.hero-showcase {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.hero-stage::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #020202 0%, rgba(2, 2, 2, 0.62) 12%, transparent 38%);
+  content: "";
+  pointer-events: none;
 }
 
 .molecule-web {
@@ -567,11 +589,13 @@ svg {
   width: min(245px, 29%);
 }
 
-.hero-vial-side {
-  right: 4%;
-  bottom: 14%;
-  width: min(315px, 38%);
-  transform: rotate(90deg);
+.hero-vial-secondary {
+  right: 5%;
+  bottom: 17%;
+  z-index: 4;
+  width: min(205px, 25%);
+  transform: translateY(10px) rotate(2deg);
+  filter: drop-shadow(0 24px 38px rgba(0, 0, 0, 0.9));
 }
 
 .stage-plinth {
@@ -1550,6 +1574,15 @@ svg {
   .hero-stage {
     min-height: 430px;
     margin-top: 24px;
+    border-left: 0;
+  }
+
+  .hero-showcase {
+    object-position: 58% center;
+  }
+
+  .hero-stage::after {
+    background: linear-gradient(180deg, #020202 0%, transparent 22%, rgba(2, 2, 2, 0.15) 100%);
   }
 
   .packaging-box {
@@ -1565,10 +1598,10 @@ svg {
     width: 34%;
   }
 
-  .hero-vial-side {
-    right: -3%;
-    bottom: 14%;
-    width: 43%;
+  .hero-vial-secondary {
+    right: 0;
+    bottom: 17%;
+    width: 29%;
   }
 
   .dna-rail {
