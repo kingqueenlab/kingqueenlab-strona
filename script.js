@@ -12,9 +12,9 @@ const products = [
       { label: "20mg Vial", price: 90, image: "tirzepatide-20mg.webp" },
       { label: "40mg Vial", price: 140, image: "tirzepatide-40mg.webp" },
       { label: "60mg Vial", price: 180, image: "tirzepatide-60mg.webp" },
-      { label: "20mg Pen", price: 130, image: "pen-tirzepatide-20mg.png", fit: "contain" },
-      { label: "40mg Pen", price: 180, image: "pen-tirzepatide-40mg.png", fit: "contain" },
-      { label: "60mg Pen", price: 220, image: "pen-tirzepatide-60mg.png", fit: "contain" }
+      { label: "20mg Pen", price: 130, image: "injection-pen-tirzepatide-20mg.webp", fit: "contain" },
+      { label: "40mg Pen", price: 180, image: "injection-pen-tirzepatide-40mg.webp", fit: "contain" },
+      { label: "60mg Pen", price: 220, image: "injection-pen-tirzepatide-60mg.webp", fit: "contain" }
     ]
   },
   {
@@ -30,9 +30,9 @@ const products = [
       { label: "20mg Vial", price: 110, image: "retatrutide-20mg.webp" },
       { label: "40mg Vial", price: 160, image: "retatrutide-40mg.webp" },
       { label: "60mg Vial", price: 190, image: "retatrutide-60mg.webp" },
-      { label: "20mg Pen", price: 150, image: "pen-retatrutide-20mg.png", fit: "contain" },
-      { label: "40mg Pen", price: 200, image: "pen-retatrutide-40mg.png", fit: "contain" },
-      { label: "60mg Pen", price: 230, image: "pen-retatrutide-60mg.png", fit: "contain" }
+      { label: "20mg Pen", price: 150, image: "injection-pen-retatrutide-20mg.webp", fit: "contain" },
+      { label: "40mg Pen", price: 200, image: "injection-pen-retatrutide-40mg.webp", fit: "contain" },
+      { label: "60mg Pen", price: 230, image: "injection-pen-retatrutide-60mg.webp", fit: "contain" }
     ]
   },
   {
@@ -60,8 +60,8 @@ const products = [
       { label: "10mg Vial", price: 30, image: "melanotan-2-10mg.webp" },
       { label: "10mg Spray", price: 35, image: "melanotan-2-spray.webp" },
       { label: "20mg Spray", price: 55, image: "melanotan-2-spray.webp" },
-      { label: "20mg Pen", price: 80, image: "pen-melanotan-2-20mg.png", fit: "contain" },
-      { label: "30mg Pen", price: 100, image: "pen-melanotan-2-20mg.png", fit: "contain" }
+      { label: "20mg Pen", price: 80, image: "injection-pen-melanotan-2-20mg.webp", fit: "contain" },
+      { label: "30mg Pen", price: 100, image: "injection-pen-melanotan-2-20mg.webp", fit: "contain" }
     ]
   },
   {
@@ -74,7 +74,7 @@ const products = [
     references: ["Cellular metabolism literature", "Redox cofactor review", "Laboratory material notes"],
     options: [
       { label: "500mg Vial", price: 70, image: "nad-500mg.webp" },
-      { label: "500mg Pen", price: 110, image: "pen-nad-500mg.png", fit: "contain" },
+      { label: "500mg Pen", price: 110, image: "injection-pen-nad-500mg.webp", fit: "contain" },
       { label: "1000mg Vial", price: 110, image: "nad-1000mg.webp" }
     ]
   },
@@ -88,7 +88,7 @@ const products = [
     references: ["Blend material overview", "Peptide reference categories", "Format documentation"],
     options: [
       { label: "80mg Vial", price: 80, image: "klow-80mg.webp" },
-      { label: "80mg Pen", price: 120, image: "pen-klow-80mg.png", fit: "contain" }
+      { label: "80mg Pen", price: 120, image: "injection-pen-klow-80mg.webp", fit: "contain" }
     ]
   },
   { id: "bpc-157", name: "BPC-157", category: "Peptide research", description: "A peptide research material often referenced in tissue and cellular study contexts.", molecular: "Synthetic peptide fragment used in research literature.", image: "bpc-157-10mg.webp", references: ["Peptide research notes", "Cellular study contexts", "Educational compound review"], options: [{ label: "10mg Vial", price: 35, image: "bpc-157-10mg.webp" }] },
@@ -136,13 +136,23 @@ function getImageClass(option) {
   return "";
 }
 
+function usePenImageFallback(event) {
+  const image = event.currentTarget;
+  const source = image.getAttribute("src") || "";
+  if (!source.startsWith("injection-pen-") || image.dataset.fallbackUsed) return;
+  image.dataset.fallbackUsed = "true";
+  image.src = source.replace(/^injection-/, "").replace(/\.webp$/i, ".png");
+}
+
 function createCard(product, compact = false) {
   const template = $("#product-card-template").content.cloneNode(true);
   const card = $(".product-card", template);
   const first = product.options[0];
-  $("img", card).src = first.image || product.image;
-  $("img", card).alt = `${product.name} ${first.label}`;
-  if (first.fit) $("img", card).className = getImageClass(first);
+  const cardImage = $("img", card);
+  cardImage.src = first.image || product.image;
+  cardImage.alt = `${product.name} ${first.label}`;
+  cardImage.addEventListener("error", usePenImageFallback);
+  if (first.fit) cardImage.className = getImageClass(first);
   $("[data-card-category]", card).textContent = product.category;
   $("[data-card-name]", card).textContent = product.name;
   $("[data-card-strength]", card).textContent = first.label;
@@ -214,6 +224,7 @@ function openProduct(id) {
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  $("[data-modal-image]", panel).addEventListener("error", usePenImageFallback);
   $("[data-close-product]", panel).addEventListener("click", closeProduct);
   $("[data-option-select]", panel).addEventListener("change", updateModalOption);
   $("[data-add-product]", panel).addEventListener("click", addActiveToCart);
@@ -223,6 +234,7 @@ function updateModalOption(event) {
   state.activeOption = Number(event.target.value);
   const option = state.activeProduct.options[state.activeOption];
   const image = $("[data-modal-image]");
+  delete image.dataset.fallbackUsed;
   image.src = option.image;
   image.alt = `${state.activeProduct.name} ${option.label}`;
   image.className = getImageClass(option);
