@@ -3,18 +3,31 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="King Queen Lab premium research compounds and laboratory reference materials. Product information and enquiries for research purposes only.">
+    <meta name="description" content="King Queen Lab premium research materials for UK research enquiries. Research use only.">
     <title>King Queen Lab | Premium Research Materials</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260704-research-spotlight">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260812-reference-direction">
   </head>
   <body>
-    <div class="legal-bar">
-      <span>For research purposes only</span>
-      <span>Not for human consumption</span>
-      <span>No medical advice</span>
+    <div class="entry-gate" data-entry-gate aria-modal="true" role="dialog" aria-labelledby="entry-title">
+      <div class="entry-panel">
+        <div class="entry-crown">KQL</div>
+        <p class="eyebrow">King Queen Lab</p>
+        <h1 id="entry-title">Website Entry</h1>
+        <p>This website is intended for adults aged 18+.</p>
+        <p>Products and information displayed on this website are intended for research purposes only.</p>
+        <label class="entry-check">
+          <input type="checkbox" data-entry-confirm>
+          <span>I confirm that I am 18 or over and have read the website entry information.</span>
+        </label>
+        <div class="entry-actions">
+          <button class="button button-primary" type="button" data-entry-enter disabled>Enter website</button>
+          <a class="button button-ghost" href="https://www.google.com">Exit</a>
+        </div>
+        <small>Prototype wording only. Final legal text should be reviewed before launch.</small>
+      </div>
     </div>
 
     <header class="site-header" data-header>
@@ -32,249 +45,282 @@
       </button>
 
       <nav class="site-nav" data-nav>
-        <a href="#compounds">Catalogue</a>
-        <a href="#standards">Why KQL</a>
-        <a href="research.html">Research dossier</a>
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="research.html">Research</a>
+        <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
-        <button class="basket-trigger" type="button" data-open-cart>
-          Basket
-          <strong data-cart-count>0</strong>
-        </button>
       </nav>
+
+      <div class="header-actions">
+        <button class="icon-action" type="button" aria-label="Search" data-search-toggle>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
+        </button>
+        <button class="icon-action" type="button" aria-label="Account">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.8-4.2 5-6 8-6s6.2 1.8 8 6"></path></svg>
+        </button>
+        <button class="icon-action bag-action" type="button" aria-label="Shopping bag" data-open-cart>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 13H7L6 8Z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>
+          <span data-cart-count>0</span>
+        </button>
+      </div>
     </header>
+
+    <div class="search-drawer" data-search-drawer>
+      <label>
+        <span>Search collection</span>
+        <input type="search" placeholder="Search research materials..." data-search>
+      </label>
+    </div>
 
     <main>
       <section class="hero" id="home">
-        <img class="hero-background" src="kingqueenlab-hero.png" alt="Modern King Queen Lab research environment">
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="eyebrow">Premium research materials</p>
-          <h1>King Queen Lab</h1>
-          <p class="hero-lead">A refined catalogue of research compounds, material formats and educational reference information.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#compounds">Explore catalogue</a>
-            <a class="button button-secondary" href="#standards">Why King Queen Lab</a>
-          </div>
-          <p class="hero-legal">Products and content are intended exclusively for research purposes. Not for human consumption.</p>
-        </div>
-        <a class="hero-next" href="#compounds">
-          <span>Discover the collection</span>
-          <strong>↓</strong>
-        </a>
-      </section>
-
-      <section class="confidence-strip" aria-label="King Queen Lab service highlights">
-        <div>
-          <span>01</span>
-          <strong>Curated catalogue</strong>
-          <p>Clear formats and strengths in one focused collection.</p>
-        </div>
-        <div>
-          <span>02</span>
-          <strong>Discreet process</strong>
-          <p>Private product enquiries with responsive support.</p>
-        </div>
-        <div>
-          <span>03</span>
-          <strong>Research context</strong>
-          <p>Reference information accompanies every compound.</p>
-        </div>
-      </section>
-
-      <section class="research-spotlight">
-        <div class="spotlight-visual" aria-label="Tirzepatide and Retatrutide research collection">
-          <img class="spotlight-primary" src="tirzepatide-20mg.webp" alt="Tirzepatide research vial">
-          <img class="spotlight-secondary" src="retatrutide-20mg.webp" alt="Retatrutide research vial">
-          <span class="spotlight-label">Dual and triple receptor research</span>
-        </div>
-        <div class="spotlight-copy">
-          <p class="eyebrow">Research spotlight</p>
-          <h2>Understand the science behind the names.</h2>
-          <p>Explore a dedicated educational dossier covering receptor targets, molecular context, clinical research programmes and important limitations for Tirzepatide and Retatrutide.</p>
-          <div class="receptor-row">
-            <span>GIP</span>
-            <span>GLP-1</span>
-            <span>Glucagon</span>
-          </div>
-          <a class="button button-secondary" href="research.html">Open research dossier</a>
-        </div>
-      </section>
-
-      <section class="catalogue" id="compounds" aria-labelledby="compounds-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">The collection</p>
-            <h2 id="compounds-title">Research compounds</h2>
-            <p>Open a product to review available formats, strengths, pricing and research information.</p>
-          </div>
-          <label class="search-box">
-            <span>Find a compound</span>
-            <input type="search" placeholder="Search the catalogue" data-search>
-          </label>
-        </div>
-        <div class="compound-grid" data-reference-grid></div>
-        <p class="empty-state" data-empty-state hidden>No products match this search.</p>
-      </section>
-
-      <section class="standards" id="standards">
-        <div class="standards-intro">
-          <p class="eyebrow">The KQL standard</p>
-          <h2>Clarity at every step.</h2>
-          <p>Designed for customers who expect precise information, a discreet enquiry process and a premium research-focused experience.</p>
-          <a class="text-link" href="#contact">Speak with KQL support</a>
-        </div>
-        <div class="standard-list">
-          <article>
-            <span>01</span>
-            <div>
-              <h3>Transparent options</h3>
-              <p>Open any product to compare its available vial, spray or pen formats and see the relevant price.</p>
+        <div class="hero-orbit" aria-hidden="true"></div>
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Precision. Quality. Research.</p>
+            <h1><span>King Queen</span><strong>Lab</strong></h1>
+            <p class="hero-lead">Premium research materials for advanced studies.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#shop">Shop collection</a>
+              <a class="button button-secondary" href="#about">Discover more</a>
             </div>
-          </article>
-          <article>
-            <span>02</span>
-            <div>
-              <h3>Premium presentation</h3>
-              <p>Every product is shown with dedicated visual material and a clear research profile.</p>
+            <div class="hero-proof-grid" aria-label="King Queen Lab proof points">
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M6 5c4 4 8 4 12 0M6 19c4-4 8-4 12 0"></path></svg>
+                <strong>Research grade</strong>
+                <span>Purity and potency tested</span>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 7v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4Z"></path><path d="m8.5 12 2.4 2.4L16 9"></path></svg>
+                <strong>Lab verified</strong>
+                <span>Quality controlled batches</span>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h10v10H4z"></path><path d="M14 11h3l3 3v4h-6z"></path><path d="M7 18a2 2 0 1 0 0 .1M17 18a2 2 0 1 0 0 .1"></path></svg>
+                <strong>Discreet packaging</strong>
+                <span>Secure and discreet delivery</span>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path><path d="M12 14v2"></path></svg>
+                <strong>Secure payments</strong>
+                <span>Protected checkout</span>
+              </div>
             </div>
-          </article>
-          <article>
-            <span>03</span>
-            <div>
-              <h3>Responsible information</h3>
-              <p>Research context and legal disclaimers remain visible throughout the experience.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="library" id="library">
-        <div class="library-visual">
-          <img src="tirzepatide-20mg.webp" alt="King Queen Lab research vial">
-        </div>
-        <div class="library-copy">
-          <p class="eyebrow">Research library</p>
-          <h2>More than a product image.</h2>
-          <p>Each compound profile combines available product formats with molecular context, research category information and suggested directions for further literature review.</p>
-          <div class="library-points">
-            <span>Molecular information</span>
-            <span>Research category</span>
-            <span>Reference prompts</span>
-            <span>Responsible disclaimers</span>
           </div>
-          <a class="button button-secondary" href="#compounds">Browse product profiles</a>
-        </div>
-      </section>
 
-      <section class="compliance">
-        <p class="eyebrow">Important information</p>
-        <h2>Research use only.</h2>
-        <p>King Queen Lab products are presented exclusively as research materials. They are not intended for human consumption, diagnosis, treatment, prevention or medical use. Website content does not constitute medical advice or dosage guidance.</p>
-      </section>
-
-      <section class="enquiry" id="enquiry">
-        <div class="enquiry-intro">
-          <p class="eyebrow">Private enquiry</p>
-          <h2>Ready to discuss your selection?</h2>
-          <p>Add products to your basket and send a structured enquiry directly to King Queen Lab.</p>
-          <div class="enquiry-note">
-            <strong>Your basket is attached automatically.</strong>
-            <span>No external email application is required.</span>
+          <div class="hero-stage reveal" aria-label="King Queen Lab product presentation">
+            <div class="molecule-web" aria-hidden="true"></div>
+            <div class="dna-rail" aria-hidden="true"></div>
+            <div class="packaging-box">
+              <span class="box-crown">♛</span>
+              <strong>King Queen<br>Lab</strong>
+              <small>Research material</small>
+            </div>
+            <img class="hero-vial hero-vial-main" src="tirzepatide-20mg.webp" alt="Tirzepatide 20mg research vial">
+            <img class="hero-vial hero-vial-side" src="nad-500mg.webp" alt="NAD+ 500mg research vial">
+            <div class="stage-plinth"></div>
           </div>
         </div>
-        <form class="enquiry-form" data-enquiry-form>
-          <label>
-            Name
-            <input name="name" type="text" autocomplete="name" required>
-          </label>
-          <label>
-            Email
-            <input name="email" type="email" autocomplete="email" required>
-          </label>
-          <label>
-            Enquiry notes
-            <textarea name="message" rows="5" placeholder="Tell us what information you need" required></textarea>
-          </label>
-          <label class="consent-field">
-            <input name="research_confirmation" type="checkbox" required>
-            <span>I confirm that my enquiry concerns research materials only and consent to my details being used to respond to this enquiry.</span>
-          </label>
-          <button class="button button-primary" type="submit">Send private enquiry</button>
-          <p class="form-status" data-form-status aria-live="polite"></p>
+      </section>
+
+      <section class="trust-strip" aria-label="Brand attributes">
+        <div class="trust-item reveal">
+          <span class="line-icon">R</span>
+          <strong>Research first</strong>
+          <p>Dedicated to scientific research and educational material review.</p>
+        </div>
+        <div class="trust-item reveal">
+          <span class="line-icon">Q</span>
+          <strong>Quality focused</strong>
+          <p>Consistent standards across formats, presentation and documentation.</p>
+        </div>
+        <div class="trust-item reveal">
+          <span class="line-icon">D</span>
+          <strong>Discreet delivery</strong>
+          <p>Secure, careful and discreet delivery for UK research customers.</p>
+        </div>
+        <div class="trust-item reveal">
+          <span class="line-icon">S</span>
+          <strong>Secure payments</strong>
+          <p>A protected checkout experience designed for confidence.</p>
+        </div>
+      </section>
+
+      <section class="collection-section" id="shop">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Selected research collection</p>
+          <h2>Featured Products</h2>
+        </div>
+        <div class="featured-grid" data-featured-grid></div>
+        <div class="center-action">
+          <a class="button button-secondary" href="#catalogue">View all products</a>
+        </div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div class="about-media reveal">
+          <img src="kingqueenlab-hero.png" alt="King Queen Lab laboratory visual identity">
+        </div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">About King Queen Lab</p>
+          <h2>Rooted in science. Driven by <span>purpose.</span></h2>
+          <p>King Queen Lab presents research materials with a premium scientific identity: clear product information, disciplined visual standards and a refined customer experience for UK research enquiries.</p>
+          <div class="metrics">
+            <strong>Research focus</strong>
+            <strong>Quality standards</strong>
+            <strong>UK market</strong>
+          </div>
+          <a class="button button-primary" href="#quality">Discover King Queen Lab</a>
+        </div>
+      </section>
+
+      <section class="quality-section" id="quality">
+        <div class="quality-copy reveal">
+          <p class="eyebrow">Research / Quality</p>
+          <h2>Research without compromise.</h2>
+          <p>Our visual system is built around scientific clarity: molecular language, product format transparency and restrained luxury cues that keep the brand serious, modern and trustworthy.</p>
+        </div>
+        <div class="quality-panel reveal">
+          <button type="button" class="quality-tab is-active" data-quality-tab="research">Research</button>
+          <button type="button" class="quality-tab" data-quality-tab="standards">Quality standards</button>
+          <button type="button" class="quality-tab" data-quality-tab="documentation">Documentation</button>
+          <div class="quality-content" data-quality-content>
+            Educational reference pages for key research compounds, including general molecular context and literature direction.
+          </div>
+        </div>
+      </section>
+
+      <section class="catalogue-section" id="catalogue">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Laboratory reference collection</p>
+          <h2>All Research Materials</h2>
+          <p>Open a product to review formats, strengths, research category and reference notes.</p>
+        </div>
+        <div class="catalogue-grid" data-catalogue-grid></div>
+      </section>
+
+      <section class="newsletter-section reveal">
+        <div>
+          <p class="eyebrow">Stay informed</p>
+          <h2>Research updates and new product releases.</h2>
+        </div>
+        <form class="newsletter-form" data-newsletter-form>
+          <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+          <button class="button button-primary" type="submit">Subscribe</button>
         </form>
       </section>
 
-      <section class="contact" id="contact">
-        <div>
+      <section class="contact-section" id="contact">
+        <div class="contact-card reveal">
           <p class="eyebrow">Contact</p>
-          <h2>Connect with King Queen Lab.</h2>
-          <p>Product enquiries, research information and brand updates through your preferred channel.</p>
+          <h2>For general research information enquiries only.</h2>
+          <p>Use the form below or contact King Queen Lab through your preferred channel.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/king.queen.lab" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@king.queen.lab" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://wa.me/447375599830" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
-        <div class="social-grid">
-          <a href="https://www.facebook.com/profile.php?id=61564510697711" target="_blank" rel="noreferrer"><span>Facebook</span><strong>↗</strong></a>
-          <a href="https://www.instagram.com/king.queen.lab/" target="_blank" rel="noreferrer"><span>Instagram</span><strong>↗</strong></a>
-          <a href="https://www.tiktok.com/@king.queen.lab" target="_blank" rel="noreferrer"><span>TikTok</span><strong>↗</strong></a>
-          <a href="https://wa.me/447375599830" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>↗</strong></a>
-        </div>
+        <form class="enquiry-form reveal" data-enquiry-form>
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" placeholder="Tell us what information you need" required></textarea>
+          </label>
+          <label class="consent-field">
+            <input type="checkbox" required>
+            <span>I understand this enquiry is for research information only.</span>
+          </label>
+          <button class="button button-primary" type="submit">Send enquiry</button>
+          <p class="form-status" data-form-status aria-live="polite"></p>
+        </form>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="kql-logo-transparent.webp" alt="King Queen Lab logo">
+        <p>Premium research materials for advanced scientific studies.</p>
+        <span>KQ LAB LTD</span>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <a href="#catalogue">All Products</a>
+        <a href="#shop">Research Collection</a>
+        <a href="#catalogue">Research Supplies</a>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <a href="#about">About Us</a>
+        <a href="research.html">Research</a>
+        <a href="#quality">Quality Standards</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <a href="#">FAQs</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Shipping &amp; Delivery</a>
+        <a href="#">Returns &amp; Refunds</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:contact@kingqueenlab.com">contact@kingqueenlab.com</a>
+        <a href="https://kingqueenlab.com">kingqueenlab.com</a>
+        <span>United Kingdom</span>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 King Queen Lab. All rights reserved.</span>
+        <strong>Research use only</strong>
+      </div>
+    </footer>
 
     <aside class="cart-drawer" data-cart-drawer aria-hidden="true">
       <div class="cart-panel">
         <div class="cart-head">
           <div>
-            <p class="eyebrow">Selected products</p>
-            <h2>Your basket</h2>
+            <p class="eyebrow">Selected materials</p>
+            <h2>Enquiry bag</h2>
           </div>
-          <button class="icon-button" type="button" data-close-cart aria-label="Close basket">&times;</button>
+          <button class="modal-close" type="button" data-close-cart aria-label="Close enquiry bag">&times;</button>
         </div>
         <div class="cart-items" data-cart-items></div>
         <div class="cart-summary">
-          <span>Subtotal</span>
-          <strong data-cart-subtotal>£0</strong>
+          <span>Estimated subtotal</span>
+          <strong data-cart-subtotal>&pound;0</strong>
         </div>
-        <a class="button button-primary" href="#enquiry" data-cart-enquiry>Continue to enquiry</a>
-        <p class="drawer-legal">Research purposes only. Not for human consumption.</p>
+        <a class="button button-primary" href="#contact" data-cart-enquiry>Continue to enquiry</a>
       </div>
     </aside>
 
-    <aside class="reference-modal" data-reference-modal aria-hidden="true">
-      <div class="reference-modal-panel" data-reference-modal-panel role="dialog" aria-modal="true" aria-label="Product information"></div>
+    <aside class="product-modal" data-product-modal aria-hidden="true">
+      <div class="product-modal-panel" data-product-modal-panel role="dialog" aria-modal="true" aria-label="Product information"></div>
     </aside>
 
-    <footer class="site-footer">
-      <a class="footer-brand" href="#home">
-        <img src="kql-logo-transparent.webp" alt="">
-        <span>King Queen Lab</span>
-      </a>
-      <div>
-        <strong>Research materials</strong>
-        <a href="research.html">Research dossier</a>
-        <span>For research purposes only. Not for human consumption.</span>
-      </div>
-      <span>&copy; 2026 King Queen Lab</span>
-    </footer>
-
-    <template id="reference-template">
-      <article class="compound-card">
-        <button class="compound-open" type="button" data-open-reference aria-label="View product options"></button>
-        <div class="compound-media">
+    <template id="product-card-template">
+      <article class="product-card">
+        <button type="button" class="favourite" aria-label="Save product">&hearts;</button>
+        <div class="product-media">
           <img data-card-image alt="">
-          <span class="compound-badge" data-card-category></span>
         </div>
-        <div class="compound-body">
-          <p class="compound-index">KQL Research Collection</p>
-          <h3 data-card-heading></h3>
-          <p data-card-tagline></p>
-          <div class="format-summary" data-card-formats></div>
-          <div class="card-action">
-            <span>View options</span>
-            <strong>↗</strong>
-          </div>
-        </div>
+        <p class="product-kicker" data-card-category></p>
+        <h3 data-card-name></h3>
+        <p data-card-strength></p>
+        <strong data-card-price></strong>
+        <button class="product-link" type="button" data-card-open>View product</button>
       </article>
     </template>
 
-    <script src="script.js?v=20260704-alphabetical"></script>
+    <script src="script.js?v=20260917-price-list-update"></script>
   </body>
 </html>
